@@ -1,0 +1,121 @@
+
+/* Global Reset Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: sans-serif;
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  input, textarea, button, select {
+    font: inherit;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: none;
+  }
+  
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  button {
+    cursor: pointer;
+  }
+  
+  ul, ol {
+    list-style: none;
+  }
+  
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  
+  :root {
+    --primary-color: #000; /* Define global CSS variables if needed */
+  }
+
+    button {
+        padding: 8px 16px;
+        background-color: green;
+        color: white;
+        border-radius: 8px;
+    }
+
+    button:hover {
+        background-color: white;
+        color: green;
+        border: 2px solid green;
+    }
+
+  /* Title Section */
+
+  .title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 32px;
+    padding: 32px;
+    background-color: white;
+    gap: 8px;
+    max-width: 960px;
+    min-width: 960px;
+  }
+
+  @media (max-width: 1000px) {
+
+    .title-container {
+        min-width: 500px;
+      }
+
+  }
+
+  /* Content */
+
+    .content-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 32px;
+        padding: 32px;
+        background-color: white;
+        gap: 16px;
+        min-width: 500px;
+    }
+
+    /* Select Button */
+
+    select {
+        padding: 8px 16px; 
+        border: 2px solid green; 
+        border-radius: 8px; 
+        background-color: #f8f8f8; 
+        color: #333; 
+        font-size: 16px; 
+        font-family: inherit; 
+        outline: none; 
+        cursor: pointer;
+    }
+
+    select:hover {
+        background-color: #e0f7fa; 
+        border-color: #00796b; 
+    }
+
+    
