@@ -10,26 +10,32 @@ document.addEventListener("DOMContentLoaded", resetPage);
 
 // 
 submit.addEventListener("click", () => {
-    // init variables
-    const compChoice =  computerChoice();
+    //
+    const compChoice = computerChoice();
     const userChoice = select.value;
     //
-    if (determineWinner(userChoice, compChoice) === userChoice) {
-        displayWinner.textContent = "You beat The Machine!";
-    } else if (determineWinner(userChoice, compChoice) === compChoice) {
-        displayWinner.textContent = "The Machine Beat You!";
-    } else {
+    const result = determineWinner(userChoice, compChoice);
+    //
+    if (result === "tie") {
         displayWinner.textContent = "It's a tie!";
+    } else if (result === userChoice) {
+        displayWinner.textContent = "You beat The Machine!";
+    } else {
+        displayWinner.textContent = "The Machine Beat You!";
     }
     //
     displayComputerChoice.textContent = compChoice;
+    displayComputerChoice.style.display = "block";
+    displayWinner.style.display = "block";
+    //
+    submit.style.display = "none";
 });
 
 // Helper Function To Determine Winner
 function determineWinner(userChoice, compChoice) {
     //
     if (userChoice === compChoice) {
-        return "It's a tie!";
+        return "tie";
     }
     //
     if (
@@ -62,7 +68,7 @@ function computerChoice() {
 }
 
 // Game Reset
-resetButton.addEventListener("click", resetPage());
+resetButton.addEventListener("click", resetPage);
 
 // Helper function for returning page to default state
 function resetPage() {
@@ -74,5 +80,7 @@ function resetPage() {
     displayWinner.style.display = "none";
     // Resetting player choice
     select.selectedIndex = 0;
+    // Setting submit button visibility to block
+    submit.style.display = "block";
 }
 
