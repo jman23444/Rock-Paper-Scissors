@@ -119,3 +119,31 @@ html, body {
     }
 
     
+    /* Button Container */
+  
+    .button-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      gap: 16px;
+    }
+
+    .button-container button#rock, button#paper, button#scissors  {
+      background-color: rgb(56, 56, 222);
+    }
+
+    .button-container 
+      button#rock:hover, 
+      button#paper:hover, 
+      button#scissors:hover {
+        background-color: #fff;
+        color: rgb(56, 56, 222);
+        border: 2px solid rgb(56, 56, 222);
+    }
+
+    .button-container button.active {
+        background-color: #fff !important;
+        color: rgb(56, 56, 222);
+        border: 2px solid rgb(56, 56, 222);
+    }

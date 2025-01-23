@@ -1,21 +1,27 @@
-// Init DOM elements
-// const select = document.querySelector("select"); 
-const buttons = document.querySelectorAll(".button-container button");
 
-const submit = document.getElementById("submit");
-const displayComputerChoice = document.getElementById("display-computer-choice");
-const displayWinner = document.getElementById("display-winner"); 
-const resetButton = document.getElementById("play-again"); 
-
-// Init default state on page load
+// Default state of page load 
 document.addEventListener("DOMContentLoaded", resetPage);
 
-// 
+// Intializing variables
+const buttons = document.querySelectorAll(".button-container button");
+const displayComputerChoice = document.querySelector("#display-computer-choice");
+const displayWinner = document.querySelector("#display-winner");
+const resetButton = document.querySelector("#play-again");
+
+// Getting user's choice
+let userChoice;
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        buttons.forEach((btn) => btn.classList.remove('active'));
+        userChoice = button.id;
+        button.classList.toggle('active');
+    })
+})
+
+//
 submit.addEventListener("click", () => {
-    //
-    const compChoice = computerChoice();
-    // const userChoice = select.value;
-    const userChoice = buttons.target;
+    // 
+    const compChoice = generateChoice();
     //
     const result = determineWinner(userChoice, compChoice);
     //
@@ -33,6 +39,9 @@ submit.addEventListener("click", () => {
     //
     submit.style.display = "none";
 });
+
+// Game Reset
+resetButton.addEventListener("click", resetPage);
 
 // Helper Function To Determine Winner
 function determineWinner(userChoice, compChoice) {
@@ -52,28 +61,21 @@ function determineWinner(userChoice, compChoice) {
     return compChoice;
 }
 
-// Helper Function to generate Computer Choice
-function computerChoice() {
-    const randomNum = Math.floor(Math.random() * 3) + 1;
-    let computersChoice = "";
+// Helper Function To Generate Computer Choice
+function generateChoice() {
+    let randomNum = Math.floor(Math.random() * 3);
+    //
     switch (randomNum) {
+        case (0):
+            return 'rock';
         case (1):
-            computersChoice = "rock";
-            break;
+            return 'paper';
         case (2): 
-            computersChoice = "scissors";
-            break;
-        case (3): 
-            computersChoice = "paper";
-            break;
+            return 'scissors';
     }
-    return computersChoice;
 }
 
-// Game Reset
-resetButton.addEventListener("click", resetPage);
-
-// Helper function for returning page to default state
+// Helper Function to return page to default state
 function resetPage() {
     // Resetting computer choice
     displayComputerChoice.textContent = "";
@@ -81,9 +83,20 @@ function resetPage() {
     // Resetting winner display
     displayWinner.textContent = "";
     displayWinner.style.display = "none";
-    // Resetting player choice
-    select.selectedIndex = 0;
     // Setting submit button visibility to block
     submit.style.display = "block";
+    // Toggling off the 'active' class from all buttons
+    const activeButton = document.querySelector(".button-container button.active");
+    if (activeButton) {
+        activeButton.classList.remove('active');
+    }
 }
+
+
+
+
+
+
+
+
 
