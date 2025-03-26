@@ -1,116 +1,115 @@
-
-
-
-import Validator from './validate.js';
+import Validator from "./validate.js";
 
 const rockPaperScissors = {
-    // Variables (will be initialized in init)
-    buttons: null,
-    displayComputerChoice: null,
-    displayWinner: null,
-    resetButton: null,
-    submit: null,
-    userChoice: null,
+  // Variables (will be initialized in init)
+  buttons: null,
+  displayComputerChoice: null,
+  displayWinner: null,
+  resetButton: null,
+  submit: null,
+  userChoice: null,
 
-    // Initialize the game
-    init({
-        buttonsSelector = ".button-container button",
-        computerChoiceSelector = "#display-computer-choice",
-        winnerSelector = "#display-winner",
-        resetButtonSelector = "#play-again",
-        submitSelector = "#submit"
-    } = {}) {
-        // Set up DOM elements
-        this.buttons = document.querySelectorAll(buttonsSelector);
-        this.displayComputerChoice = document.querySelector(computerChoiceSelector);
-        this.displayWinner = document.querySelector(winnerSelector);
-        this.resetButton = document.querySelector(resetButtonSelector);
-        this.submit = document.querySelector(submitSelector);
-        // Reset the page on load
-        document.addEventListener("DOMContentLoaded", () => this.resetPage());
+  // Initialize the game
+  init({
+    buttonsSelector = ".button-container button",
+    computerChoiceSelector = "#display-computer-choice",
+    winnerSelector = "#display-winner",
+    resetButtonSelector = "#play-again",
+    submitSelector = "#submit",
+  } = {}) {
+    // Set up DOM elements
+    this.buttons = document.querySelectorAll(buttonsSelector);
+    this.displayComputerChoice = document.querySelector(computerChoiceSelector);
+    this.displayWinner = document.querySelector(winnerSelector);
+    this.resetButton = document.querySelector(resetButtonSelector);
+    this.submit = document.querySelector(submitSelector);
+    // Reset the page on load
+    document.addEventListener("DOMContentLoaded", () => this.resetPage());
 
-        // Set up event listeners
-        this.setupEventListeners();
-    },
+    // Set up event listeners
+    this.setupEventListeners();
+  },
 
-    // Set up all event listeners
-    setupEventListeners() {
-        // User choice buttons
-        this.buttons.forEach((button) => {
-        button.addEventListener("click", () => {
-            this.buttons.forEach((btn) => btn.classList.remove('active'));
-            this.userChoice = button.id;
-            button.classList.toggle('active');
-        });
-        });
+  // Set up all event listeners
+  setupEventListeners() {
+    // User choice buttons
+    this.buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        this.buttons.forEach((btn) => btn.classList.remove("active"));
+        this.userChoice = button.id;
+        button.classList.toggle("active");
+      });
+    });
 
-        // Submit button
-        this.submit.addEventListener("click", () => {
-        const compChoice = this.generateChoice();
-        const result = this.determineWinner(this.userChoice, compChoice);
+    // Submit button
+    this.submit.addEventListener("click", () => {
+      const compChoice = this.generateChoice();
+      const result = this.determineWinner(this.userChoice, compChoice);
 
-        // Display results
-        if (result === "tie") {
-            this.displayWinner.textContent = "It's a tie!";
-        } else if (result === this.userChoice) {
-            this.displayWinner.textContent = "You beat The Machine!";
-        } else {
-            this.displayWinner.textContent = "The Machine Beat You!";
-        }
+      // Display results
+      if (result === "tie") {
+        this.displayWinner.textContent = "It's a tie!";
+      } else if (result === this.userChoice) {
+        this.displayWinner.textContent = "You beat The Machine!";
+      } else {
+        this.displayWinner.textContent = "The Machine Beat You!";
+      }
 
-        this.displayComputerChoice.textContent = compChoice;
-        this.displayComputerChoice.style.display = "block";
-        this.displayWinner.style.display = "block";
-        this.submit.style.display = "none";
-        });
+      this.displayComputerChoice.textContent = compChoice;
+      this.displayComputerChoice.style.display = "block";
+      this.displayWinner.style.display = "block";
+      this.submit.style.display = "none";
+    });
 
-        // Reset button
-        this.resetButton.addEventListener("click", () => this.resetPage());
-    },
+    // Reset button
+    this.resetButton.addEventListener("click", () => this.resetPage());
+  },
 
-    // Determine the winner
-    determineWinner(userChoice, compChoice) {
-        if (userChoice === compChoice) return "tie";
-        if (
-        (userChoice === "rock" && compChoice === "scissors") ||
-        (userChoice === "scissors" && compChoice === "paper") ||
-        (userChoice === "paper" && compChoice === "rock")
-        ) {
-        return userChoice;
-        }
-        return compChoice;
-    },
-
-    // Generate computer's choice
-    generateChoice() {
-        const randomNum = Math.floor(Math.random() * 3);
-        switch (randomNum) {
-        case 0: return 'rock';
-        case 1: return 'paper';
-        case 2: return 'scissors';
-        }
-    },
-
-    // Reset the page to default state
-    resetPage() {
-        this.displayComputerChoice.textContent = "";
-        this.displayComputerChoice.style.display = "none";
-        this.displayWinner.textContent = "";
-        this.displayWinner.style.display = "none";
-        this.submit.style.display = "block";
-        const activeButton = document.querySelector(".button-container button.active");
-        if (activeButton) activeButton.classList.remove('active');
-        this.userChoice = null;
+  // Determine the winner
+  determineWinner(userChoice, compChoice) {
+    if (userChoice === compChoice) return "tie";
+    if (
+      (userChoice === "rock" && compChoice === "scissors") ||
+      (userChoice === "scissors" && compChoice === "paper") ||
+      (userChoice === "paper" && compChoice === "rock")
+    ) {
+      return userChoice;
     }
-}
+    return compChoice;
+  },
+
+  // Generate computer's choice
+  generateChoice() {
+    const randomNum = Math.floor(Math.random() * 3);
+    switch (randomNum) {
+      case 0:
+        return "rock";
+      case 1:
+        return "paper";
+      case 2:
+        return "scissors";
+    }
+  },
+
+  // Reset the page to default state
+  resetPage() {
+    this.displayComputerChoice.textContent = "";
+    this.displayComputerChoice.style.display = "none";
+    this.displayWinner.textContent = "";
+    this.displayWinner.style.display = "none";
+    this.submit.style.display = "block";
+    const activeButton = document.querySelector(
+      ".button-container button.active",
+    );
+    if (activeButton) activeButton.classList.remove("active");
+    this.userChoice = null;
+  },
+};
 
 // Export the module
 export default rockPaperScissors;
 
-
-
-
-// // Default state of page load 
+// // Default state of page load
 // document.addEventListener("DOMContentLoaded", resetPage);
 
 // // Intializing variables
@@ -131,7 +130,7 @@ export default rockPaperScissors;
 
 // //
 // submit.addEventListener("click", () => {
-//     // 
+//     //
 //     const compChoice = generateChoice();
 //     //
 //     const result = determineWinner(userChoice, compChoice);
@@ -181,7 +180,7 @@ export default rockPaperScissors;
 //             return 'rock';
 //         case (1):
 //             return 'paper';
-//         case (2): 
+//         case (2):
 //             return 'scissors';
 //     }
 // }
@@ -202,12 +201,3 @@ export default rockPaperScissors;
 //         activeButton.classList.remove('active');
 //     }
 // }
-
-
-
-
-
-
-
-
-
