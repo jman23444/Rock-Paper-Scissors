@@ -1,4 +1,8 @@
 
+
+
+import Validator from './validate.js';
+
 const rockPaperScissors = {
     // Variables (will be initialized in init)
     buttons: null,
